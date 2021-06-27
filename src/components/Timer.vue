@@ -28,7 +28,7 @@ export default {
   data(){
     return{
       status : 'Start',
-      limitTime: 10,
+      limitTime: 1500,
       passTime: 0,
       startTimer: null,
       play: true
@@ -57,12 +57,14 @@ export default {
             clearInterval(this.startTimer);
               document.querySelector('#audio').pause();
               this.status = 'Time end';
+              document.querySelector('#audio').currentTime = 0;
           }
         },1000);
       if(this.passTime == this.limitTime){
         this.passTime = 0;
         clearInterval(this.startTimer);
         this.status = 'Start';
+        document.querySelector('#audio').currentTime = 0;
       }
     },
     setTime: function (params){
@@ -80,6 +82,8 @@ export default {
       this.passTime = 0;
       clearInterval(this.startTimer);
       document.querySelector('#audio').pause();
+      // reset audio
+      document.querySelector('#audio').currentTime = 0;
     }
   }
 }
